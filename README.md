@@ -1,15 +1,16 @@
 # Bitstamp
 
-    npm install bitstamp
+    npm install bitstamp-promise
 
 A basic API wrapper for the [Bitstamp REST API](https://www.bitstamp.net/api/). Please refer to [their documentation](https://www.bitstamp.net/api/) for all calls explained. Check out `example.js` for a list of all possible calls and their parameters.
 
-    var Bitstamp = require('bitstamp');
+    var Bitstamp = require('bitstamp-promise');
     var bitstamp = new Bitstamp;
 
-    bitstamp.transactions('btcusd', function(err, trades) {
-      console.log(trades);  
-    });
+    bitstamp.transactions('btcusd')
+      .then(function(trades) {
+        console.log(trades);  
+      });
 
 ## 0.3.0 - June 2016 update
 
