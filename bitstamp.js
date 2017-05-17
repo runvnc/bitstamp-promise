@@ -79,7 +79,7 @@ Bitstamp.prototype._request = function(method, path, data, args) {
 // truly unique (supports up to 999 calls per ms).
 Bitstamp.prototype._generateNonce = function() {
   var now = new Date().getTime();
-  return now;
+  return now + '';
 
   /*
   if(now !== this.last)
