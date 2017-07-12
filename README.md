@@ -1,3 +1,8 @@
+*Note: I changed this version so it needs a nonce set with `setNextNonce` 
+and will check that the nonce is greater than the last one used. This is so that it can work across
+different request servers (VPSs) with the requests initiated by the main
+server but having a nonce tracked for the account centrally.*
+
 # Bitstamp
 
     npm install bitstamp-promise

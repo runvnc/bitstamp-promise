@@ -19,7 +19,7 @@ var Bitstamp = function(key, secret, client_id) {
   this.key = key;
   this.secret = secret;
   this.client_id = client_id;
-
+  this.lastNonce = -1;
   _.bindAll.apply(_, [this].concat(_.functions(this)));
 }
 
@@ -124,7 +124,8 @@ Bitstamp.prototype._post = function(market, action, args, legacy_endpoint) {
       var path = '/api/v2/' + action + '/';
   }
 
-  var nonce = this._generateNonce();
+  var nonce = this.checkNonce(); //_generateNonce();
+  this.lastNonce = nonce;
   var message = nonce + this.client_id + this.key;
   var signer = crypto.createHmac('sha256', new Buffer(this.secret, 'utf8'));
   var signature = signer.update(message).digest('hex').toUpperCase();
@@ -132,13 +133,23 @@ Bitstamp.prototype._post = function(market, action, args, legacy_endpoint) {
   args = _.extend({
     key: this.key,
     signature: signature,
-    nonce: nonce
+    nonce: nonce+''
   }, args);
 
   args = _.compactObject(args);
   var data = querystring.stringify(args);
 
   return this._request('post', path, data, args);
+}
+
+Bitstamp.prototype.setNextNonce = function (nonce) {
+  this.nonce = nonce;
+}
+
+Bitstamp.prototype.checkNonce = function() {
+  if (!this.nonce || this.nonce*1 <= this.lastNonce*1)
+    throw new Error("Bitstamp invalid nonce. Last:"+this.lastNonce+" attempt:"+this.nonce);
+  return this.nonce;
 }
 
 //
