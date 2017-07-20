@@ -1,6 +1,6 @@
 {
   "name": "bitstamp-promise",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Bitstamp REST API wrapper using Bluebird promises",
   "keywords": [
     "bitstamp",
