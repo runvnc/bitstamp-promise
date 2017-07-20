@@ -124,16 +124,18 @@ Bitstamp.prototype._post = function(market, action, args, legacy_endpoint) {
       var path = '/api/v2/' + action + '/';
   }
 
-  var nonce = this.checkNonce(); //_generateNonce();
+  var nonce = this.checkNonce()+''; //_generateNonce();
   this.lastNonce = nonce;
+  console.log('nonce is ',nonce);
   var message = nonce + this.client_id + this.key;
+  
   var signer = crypto.createHmac('sha256', new Buffer(this.secret, 'utf8'));
   var signature = signer.update(message).digest('hex').toUpperCase();
 
   args = _.extend({
     key: this.key,
     signature: signature,
-    nonce: nonce+''
+    nonce: nonce
   }, args);
 
   args = _.compactObject(args);
