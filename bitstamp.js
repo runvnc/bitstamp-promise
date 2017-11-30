@@ -126,7 +126,6 @@ Bitstamp.prototype._post = function(market, action, args, legacy_endpoint) {
 
   var nonce = this.checkNonce()+''; //_generateNonce();
   this.lastNonce = nonce;
-  console.log('***** bitstamp nonce is',nonce);
   var message = nonce + this.client_id + this.key;
   
   var signer = crypto.createHmac('sha256', new Buffer(this.secret, 'utf8'));
