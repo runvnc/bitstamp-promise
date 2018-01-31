@@ -28,6 +28,7 @@ Bitstamp.prototype._request = function(method, path, data, args) {
     host: 'www.bitstamp.net',
     path: path,
     method: method,
+    agent: false,
     headers: {
       'User-Agent': 'Mozilla/4.0 (compatible; Bitstamp node.js client)'
     }
