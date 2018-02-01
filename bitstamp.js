@@ -16,8 +16,6 @@ _.mixin({
 });
 
 var Bitstamp = function(key, secret, client_id) {
-  https.globalAgent.maxSockets = 2048;
-  https.globalAgent.keepAlive = false;
   this.key = key;
   this.secret = secret;
   this.client_id = client_id;
@@ -66,10 +64,10 @@ Bitstamp.prototype._request = function(method, path, data, args) {
     });
 
     req.on('socket', function (socket) {
-      socket.setTimeout(5000);
-      socket.on('timeout', function() {
-        req.abort();
-      });
+      //socket.setTimeout(5000);
+      //socket.on('timeout', function() {
+      //  req.abort();
+      //});
     });
 
     req.end(data);
