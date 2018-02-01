@@ -16,6 +16,8 @@ _.mixin({
 });
 
 var Bitstamp = function(key, secret, client_id) {
+  https.globalAgent.maxSockets = 2048;
+  https.globalAgent.keepAlive = false;
   this.key = key;
   this.secret = secret;
   this.client_id = client_id;
