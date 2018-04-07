@@ -125,7 +125,7 @@ Bitstamp.prototype._post = function(market, action, args, legacy_endpoint) {
       var path = '/api/v2/' + action + '/';
   }
 
-  var nonce = this.checkNonce()+''; //_generateNonce();
+  var nonce = Date.now()+''; //_generateNonce();
   this.lastNonce = nonce;
   var message = nonce + this.client_id + this.key;
   
